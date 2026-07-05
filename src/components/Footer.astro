@@ -1,0 +1,40 @@
+---
+const { page = 'home' } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const isAbout = page === 'about';
+
+const links = isAbout
+  ? [
+      { href: base + 'index.html#platform', label: 'Platform' },
+      { href: base + 'index.html#products', label: 'Products' },
+      { href: base + 'about.html', label: 'About' },
+      { href: 'mailto:hello@valo.io', label: 'hello@valo.io' },
+    ]
+  : [
+      { href: '#platform', label: 'Platform' },
+      { href: '#products', label: 'Products' },
+      { href: '#trust', label: 'Why Valo' },
+      { href: 'mailto:hello@valo.io', label: 'hello@valo.io' },
+    ];
+---
+<footer class="bg-valo-ink relative overflow-hidden">
+  <div class="grain"></div>
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-14">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div>
+        <img src={base + 'brand_assets/logo-white-gradient.svg'} alt="Valo" class="h-7 w-auto" />
+        <p class="mt-3 text-sm" style="color: rgba(232,241,239,.6);">Turn social investment into social outcomes.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-7 gap-y-3" aria-label="Footer">
+        {links.map((l) => (
+          <a class="nav-link" href={l.href}>{l.label}</a>
+        ))}
+      </nav>
+    </div>
+    <div class="mt-10 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style="border-top: 1px solid rgba(255,255,255,.1);">
+      <p class="font-mono text-xs" style="color: rgba(232,241,239,.68);">© 2026 Valo. Part of Valo One.</p>
+      <p class="font-mono text-xs" style="color: rgba(232,241,239,.68);">Cloud-native · SOC 2 aligned · API-first</p>
+    </div>
+  </div>
+</footer>

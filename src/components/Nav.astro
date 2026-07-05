@@ -1,0 +1,55 @@
+---
+const { page = 'home' } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const isAbout = page === 'about';
+
+const links = isAbout
+  ? [
+      { href: base + 'index.html#products', label: 'Platform' },
+      { href: base + 'index.html#family', label: 'Products' },
+      { href: base + 'index.html#trust', label: 'Why Valo' },
+      { href: base + 'about.html', label: 'About', current: true },
+    ]
+  : [
+      { href: '#products', label: 'Platform' },
+      { href: '#family', label: 'Products' },
+      { href: '#trust', label: 'Why Valo' },
+      { href: base + 'about.html', label: 'About' },
+    ];
+
+const ctaHref = isAbout ? 'mailto:hello@valo.io' : '#contact';
+const logoHref = isAbout ? base + 'index.html' : '#';
+---
+<header id="site-nav" class="fixed top-0 inset-x-0 z-50" data-fade>
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <nav class="mt-4 rounded-2xl px-4 sm:px-5 py-3"
+         style="background: rgba(5,29,29,.92); backdrop-filter: blur(22px) saturate(1.4); -webkit-backdrop-filter: blur(22px) saturate(1.4); border: 1px solid rgba(255,255,255,.09); box-shadow: 0 8px 32px -12px rgba(0,0,0,.45);"
+         aria-label="Main">
+      <div class="flex items-center justify-between gap-3">
+        <a href={logoHref} class="flex items-center flex-shrink-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--focus-ring)] rounded-lg" aria-label="Valo home">
+          <img src={base + 'brand_assets/logo-white-gradient.svg'} alt="Valo" class="h-6 sm:h-7 w-auto" style="max-width: none;" />
+        </a>
+        <div class="flex items-center gap-2.5 ml-auto">
+          <div class="hidden md:flex items-center gap-7 mr-4">
+            {links.map((l) => (
+              <a class={'nav-link' + (l.current ? ' is-current' : '')} href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a>
+            ))}
+          </div>
+          <a href={ctaHref} class="btn btn-primary !py-2.5 !px-5 text-sm hidden sm:inline-flex">Book a demo</a>
+          <button type="button" id="nav-burger" class="nav-burger md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg id="burger-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+            <svg id="burger-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="mobile-menu md:hidden" hidden>
+        {links.map((l) => (
+          <a class="m-link" href={l.href}>{l.label}</a>
+        ))}
+        {!isAbout && <a class="m-link" href="#contact">Contact</a>}
+        <a href={ctaHref} class="btn btn-primary w-full mt-2 text-sm">Book a demo</a>
+      </div>
+    </nav>
+  </div>
+</header>

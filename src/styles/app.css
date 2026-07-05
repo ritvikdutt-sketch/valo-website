@@ -1,0 +1,7 @@
+/* Order matters: utilities must come AFTER the custom component styles so
+   responsive toggles like `md:hidden` can override component display rules
+   (matching how the Tailwind CDN injected utilities last). */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "./global.css";
+@import "tailwindcss/utilities";
