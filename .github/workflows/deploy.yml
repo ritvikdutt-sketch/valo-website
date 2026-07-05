@@ -10,6 +10,11 @@ permissions:
   pages: write
   id-token: write
 
+# Never let two deployments race each other
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
