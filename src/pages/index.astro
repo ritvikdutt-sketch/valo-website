@@ -718,13 +718,15 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
           { scaleX: 0 },
           { scaleX: 1, duration: 1, ease: 'power3.out', stagger: .12 }, 1.75);
 
-      // Ambient orb drift (transform only)
-      var ambientTweens = [
-        gsap.to('#orb-1', { x: -50, y: 60, duration: 14, ease: 'sine.inOut', repeat: -1, yoyo: true }),
-        gsap.to('#orb-2', { x: 60, y: -40, duration: 17, ease: 'sine.inOut', repeat: -1, yoyo: true }),
-        gsap.to('#sector-orb-1', { x: 70, y: -40, duration: 19, ease: 'sine.inOut', repeat: -1, yoyo: true }),
-        gsap.to('#sector-orb-2', { x: -80, y: 50, duration: 23, ease: 'sine.inOut', repeat: -1, yoyo: true }),
-      ];
+      // Ambient orb drift (transform only). Skipped on small screens: the
+      // orbs are heavily blurred and continuous animation of them drops
+      // frames on mobile GPUs.
+      if (window.innerWidth >= 768) {
+        gsap.to('#orb-1', { x: -50, y: 60, duration: 14, ease: 'sine.inOut', repeat: -1, yoyo: true });
+        gsap.to('#orb-2', { x: 60, y: -40, duration: 17, ease: 'sine.inOut', repeat: -1, yoyo: true });
+        gsap.to('#sector-orb-1', { x: 70, y: -40, duration: 19, ease: 'sine.inOut', repeat: -1, yoyo: true });
+        gsap.to('#sector-orb-2', { x: -80, y: 50, duration: 23, ease: 'sine.inOut', repeat: -1, yoyo: true });
+      }
 
       // Sector chips: icon tile pops when a chip is hovered
       document.querySelectorAll('.sector-chip').forEach(function (chip) {
@@ -798,11 +800,6 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
         var d = stageD();
         var isMobile = window.innerWidth < 768;
-        // Wide, non-overlapping row: the stage sits at section centre during
-        // this phase, so the row may span the whole section width
-        var lineGap = Math.min(150, (window.innerWidth * .84) / (N - 1));
-        var lineScale = isMobile ? .78 : 1;
-        var lineY = d.h * .3;
 
         var tl = gsap.timeline({
           onComplete: function () {
@@ -817,25 +814,45 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         // Phase 1: Valo One surfaces from the depth, front and centre
         tl.to('#orbit-centre', { opacity: 1, scale: 1, duration: 1.1, ease: 'back.out(1.4)' }, 0);
 
-        // Phase 2: the products line up beneath it, spaced apart, one by one
-        orbNodeEls.forEach(function (el, i) {
-          tl.to(el, {
-            x: (i - (N - 1) / 2) * lineGap, y: lineY, scale: lineScale, opacity: 1,
-            duration: .65, ease: 'back.out(1.5)',
-          }, 1.2 + i * .09);
-        });
+        if (isMobile) {
+          // There is no room for the line-up phase on small screens (the
+          // nodes overlap and spill past the viewport), so each product
+          // springs straight from the centre to its place on the circle.
+          orbNodeEls.forEach(function (el, i) {
+            var p = orbitPos(i);
+            tl.to(el, {
+              x: p.x, y: p.y, scale: 1, opacity: 1,
+              duration: .7, ease: 'back.out(1.4)',
+            }, 1.1 + i * .1);
+          });
+          tl.to('.orbit-ring', { opacity: 1, duration: .7, ease: 'power2.out', stagger: .12 }, 2.1);
+          tl.to('#eco-card', { opacity: 1, x: 0, duration: .7, ease: 'expo.out' }, 2.5);
+        } else {
+          // Wide, non-overlapping row: the stage sits at section centre during
+          // this phase, so the row may span the whole section width
+          var lineGap = Math.min(150, (window.innerWidth * .84) / (N - 1));
+          var lineY = d.h * .3;
 
-        // Phase 3: one continuous motion — the products sweep left and curl
-        // into their circle around Valo One as the formation settles
-        tl.to(stage, { x: 0, duration: 1.1, ease: 'power2.inOut' }, 2.5);
-        orbNodeEls.forEach(function (el, i) {
-          var p = orbitPos(i);
-          tl.to(el, { x: p.x, y: p.y, scale: 1, duration: 1.1, ease: 'power2.inOut' }, 2.5 + i * .03);
-        });
-        tl.to('.orbit-ring', { opacity: 1, duration: .7, ease: 'power2.out', stagger: .12 }, 3.5);
+          // Phase 2: the products line up beneath it, spaced apart, one by one
+          orbNodeEls.forEach(function (el, i) {
+            tl.to(el, {
+              x: (i - (N - 1) / 2) * lineGap, y: lineY, scale: 1, opacity: 1,
+              duration: .65, ease: 'back.out(1.5)',
+            }, 1.2 + i * .09);
+          });
 
-        // Only now does the detail card slide in from the right
-        tl.to('#eco-card', { opacity: 1, x: 0, duration: .7, ease: 'expo.out' }, 3.7);
+          // Phase 3: one continuous motion — the products sweep left and curl
+          // into their circle around Valo One as the formation settles
+          tl.to(stage, { x: 0, duration: 1.1, ease: 'power2.inOut' }, 2.5);
+          orbNodeEls.forEach(function (el, i) {
+            var p = orbitPos(i);
+            tl.to(el, { x: p.x, y: p.y, scale: 1, duration: 1.1, ease: 'power2.inOut' }, 2.5 + i * .03);
+          });
+          tl.to('.orbit-ring', { opacity: 1, duration: .7, ease: 'power2.out', stagger: .12 }, 3.5);
+
+          // Only now does the detail card slide in from the right
+          tl.to('#eco-card', { opacity: 1, x: 0, duration: .7, ease: 'expo.out' }, 3.7);
+        }
       }
 
       ScrollTrigger.create({
