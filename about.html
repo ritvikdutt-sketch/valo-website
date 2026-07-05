@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#051D1D" />
+  <meta name="description" content="Valo exists for the organisations that hold funds on behalf of others and turn them into real outcomes for real people. Meet the team and the principles we build by." />
+  <title>About Valo | Software for the work that matters most</title>
+  <link rel="icon" type="image/svg+xml" href="brand_assets/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            valo: {
+              green: '#54DB98', teal: '#029491', ink: '#051D1D',
+              50: '#ECFBF3', 100: '#D2F4E1', 200: '#A6E9C6', 300: '#54DB98',
+              400: '#2BC495', 500: '#12A98C', 600: '#029491', 700: '#07746F',
+              800: '#0A4A45', 900: '#051D1D',
+            },
+            neutral: {
+              50: '#F6F8F8', 100: '#EDF1F1', 200: '#DCE3E3', 300: '#C2CDCC',
+              400: '#9BA8A7', 500: '#6E7C7B', 600: '#4C5958', 700: '#324140',
+              800: '#1B2C2A', 900: '#051D1D',
+            },
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --valo-green: #54DB98;
+      --valo-teal: #029491;
+      --valo-ink: #051D1D;
+      --valo-gradient: linear-gradient(105deg, #54DB98 0%, #029491 100%);
+      --grad-button: linear-gradient(95deg, #0C7C50 0%, #045C57 100%);
+      --grad-button-hover: linear-gradient(95deg, #0E8C5B 0%, #06736C 100%);
+      --fg-on-dark: #E8F1EF;
+      --focus-ring: rgba(18, 169, 140, .45);
+      --shadow-card: 0 1px 2px rgba(5, 29, 29, .05), 0 8px 24px -10px rgba(2, 148, 145, .16);
+    }
+
+    html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 5.5rem; } /* clear the fixed nav on anchor jumps */
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--valo-ink);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display { letter-spacing: -0.03em; }
+    .body-copy { line-height: 1.7; }
+
+    .eyebrow {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: .75rem; letter-spacing: .14em;
+      text-transform: uppercase; font-weight: 500;
+    }
+    .text-gradient {
+      background: var(--valo-gradient);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(900px 620px at 78% 18%, rgba(2, 148, 145, .34), transparent 62%),
+        radial-gradient(700px 520px at 12% 82%, rgba(84, 219, 152, .16), transparent 60%),
+        radial-gradient(520px 420px at 42% -8%, rgba(12, 58, 55, .9), transparent 70%),
+        #051D1D;
+    }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none;
+      opacity: .045; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .glow-orb { position: absolute; border-radius: 999px; filter: blur(70px); pointer-events: none; will-change: transform; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      font-weight: 600; font-size: .9375rem; line-height: 1;
+      padding: .875rem 1.5rem; border-radius: 999px;
+      transition: transform .18s cubic-bezier(.34,1.56,.64,1), opacity .18s ease;
+      will-change: transform;
+    }
+    .btn:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); }
+    .btn:active { transform: translateY(1px) scale(.98); }
+    .btn-primary {
+      color: #fff; position: relative; isolation: isolate; overflow: hidden;
+      background: var(--grad-button);
+      box-shadow: 0 1px 2px rgba(5,29,29,.3), 0 10px 26px -10px rgba(2,148,145,.55);
+    }
+    .btn-primary::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: var(--grad-button-hover); opacity: 0; transition: opacity .18s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-ghost-dark {
+      color: var(--fg-on-dark);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.22);
+      position: relative; isolation: isolate; overflow: hidden;
+    }
+    .btn-ghost-dark::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: rgba(255,255,255,.08); opacity: 0; transition: opacity .18s ease;
+    }
+    .btn-ghost-dark:hover { transform: translateY(-2px); }
+    .btn-ghost-dark:hover::after { opacity: 1; }
+
+    .nav-link {
+      position: relative; font-size: .875rem; font-weight: 500;
+      color: rgba(232,241,239,.75); padding: .375rem .125rem;
+      transition: color .18s ease;
+    }
+    .nav-link::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
+      background: var(--valo-gradient); border-radius: 2px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .22s cubic-bezier(.22,1,.36,1);
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
+    .nav-link:focus-visible { outline: none; color: #fff; }
+    .nav-link.is-current { color: #fff; }
+    .nav-link.is-current::after { transform: scaleX(1); }
+
+    .nav-burger {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
+      color: #E8F1EF; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      transition: background-color .18s ease, transform .18s cubic-bezier(.34,1.56,.64,1);
+    }
+    .nav-burger:hover { background: rgba(255,255,255,.12); }
+    .nav-burger:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); }
+    .nav-burger:active { transform: scale(.94); }
+    .mobile-menu { margin-top: .75rem; padding-top: .75rem; border-top: 1px solid rgba(255,255,255,.1); display: flex; flex-direction: column; gap: .25rem; }
+    .mobile-menu[hidden] { display: none; }
+    .m-link {
+      padding: .7rem .875rem; border-radius: 10px;
+      color: rgba(232,241,239,.85); font-weight: 500; font-size: .9375rem;
+      transition: background-color .18s ease, color .18s ease;
+    }
+    .m-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .m-link:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); }
+
+    .value-card {
+      background: #fff; border: 1px solid #DCE3E3; border-radius: 20px; padding: 2rem;
+      box-shadow: var(--shadow-card);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), border-color .25s ease;
+      will-change: transform;
+    }
+    .value-card:hover { transform: translateY(-4px) scale(1.02); border-color: #A6E9C6; }
+    .icon-tile {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #ECFBF3, #D2F4E1);
+      border: 1px solid #A6E9C6; color: #07746F;
+    }
+
+    /* Terminal-style card from valo.io/about ("what we bring together") */
+    .codecard {
+      background: #051D1D; border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 24px 60px -24px rgba(5,29,29,.55);
+    }
+    .cc-bar {
+      display: flex; align-items: center; gap: .75rem;
+      padding: 13px 1.25rem; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .cc-dots { display: flex; gap: 6px; }
+    .cc-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.18); }
+    .cc-title { font-family: "JetBrains Mono", monospace; font-size: .75rem; color: rgba(232,241,239,.6); }
+    .cc-ico {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(84,219,152,.14); color: #54DB98;
+    }
+
+    .team-card {
+      background: #fff; border: 1px solid #DCE3E3; border-radius: 20px; overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), border-color .25s ease;
+      will-change: transform;
+    }
+    .team-card:hover { transform: translateY(-4px) scale(1.02); border-color: #A6E9C6; }
+    .team-photo { position: relative; aspect-ratio: 4 / 3.4; overflow: hidden; }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .team-photo::before {
+      content: ""; position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(to top, rgba(5,29,29,.55), transparent 55%);
+    }
+    .team-photo::after {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(135deg, rgba(2,148,145,.28), rgba(84,219,152,.12));
+      mix-blend-mode: multiply;
+    }
+
+    .gs-ready [data-fade] { opacity: 0; }
+    .gs-ready [data-reveal] { opacity: 0; transform: translateY(28px); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .gs-ready [data-fade], .gs-ready [data-reveal] { opacity: 1; transform: none; }
+      * { animation: none !important; }
+    }
+    ::selection { background: rgba(84,219,152,.35); }
+
+    .skip-link {
+      position: fixed; top: -100px; left: 1rem; z-index: 100;
+      padding: .75rem 1.25rem; border-radius: 999px;
+      background: #051D1D; color: #fff; font-weight: 600; font-size: .875rem;
+      border: 1px solid rgba(84,219,152,.5);
+    }
+    .skip-link:focus-visible { top: 1rem; outline: none; box-shadow: 0 0 0 4px var(--focus-ring); }
+  </style>
+</head>
+
+<body class="bg-white text-valo-ink">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ================= NAV ================= -->
+  <header id="site-nav" class="fixed top-0 inset-x-0 z-50" data-fade>
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <nav class="mt-4 rounded-2xl px-4 sm:px-5 py-3"
+           style="background: rgba(5,29,29,.92); backdrop-filter: blur(22px) saturate(1.4); -webkit-backdrop-filter: blur(22px) saturate(1.4); border: 1px solid rgba(255,255,255,.09); box-shadow: 0 8px 32px -12px rgba(0,0,0,.45);"
+           aria-label="Main">
+        <div class="flex items-center justify-between gap-3">
+          <a href="index.html" class="flex items-center flex-shrink-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--focus-ring)] rounded-lg" aria-label="Valo home">
+            <img src="brand_assets/logo-white-gradient.svg" alt="Valo" class="h-6 sm:h-7 w-auto" style="max-width: none;" />
+          </a>
+          <div class="flex items-center gap-2.5 ml-auto">
+            <div class="hidden md:flex items-center gap-7 mr-4">
+              <a class="nav-link" href="index.html#products">Platform</a>
+              <a class="nav-link" href="index.html#family">Products</a>
+              <a class="nav-link" href="index.html#trust">Why Valo</a>
+              <a class="nav-link is-current" href="about.html" aria-current="page">About</a>
+            </div>
+            <a href="mailto:hello@valo.io" class="btn btn-primary !py-2.5 !px-5 text-sm hidden sm:inline-flex">Book a demo</a>
+            <button type="button" id="nav-burger" class="nav-burger md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+              <svg id="burger-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+              <svg id="burger-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden" hidden>
+          <a class="m-link" href="index.html#products">Platform</a>
+          <a class="m-link" href="index.html#family">Products</a>
+          <a class="m-link" href="index.html#trust">Why Valo</a>
+          <a class="m-link" href="about.html">About</a>
+          <a href="mailto:hello@valo.io" class="btn btn-primary w-full mt-2 text-sm">Book a demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero-bg relative overflow-hidden">
+    <div class="grain"></div>
+    <div class="glow-orb" id="orb-1" style="width:520px;height:520px;top:-16%;right:-6%;background:rgba(2,148,145,.32);"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-36 pb-20 lg:pt-44 lg:pb-24">
+      <div class="max-w-3xl">
+        <p class="eyebrow text-valo-300 mb-6 flex items-center gap-3" data-fade><span class="inline-block w-5 h-px" style="background:#54DB98;"></span>About Valo</p>
+        <h1 class="font-display font-extrabold text-white leading-[1.08] text-4xl sm:text-5xl lg:text-6xl" data-fade>
+          Software for the work that <span class="text-gradient">matters most</span>
+        </h1>
+        <p class="body-copy mt-7 max-w-2xl text-lg" style="color: rgba(232,241,239,.78);" data-fade>
+          Valo exists for the organisations that hold funds on behalf of others and turn them into real outcomes for real people. We bring identity, payments, data and reporting together in one trusted platform, so the people doing this work can spend less time fighting systems and more time making a difference.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4" data-fade>
+          <a href="mailto:hello@valo.io" class="btn btn-primary">
+            Get in touch
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="index.html#products" class="btn btn-ghost-dark">Explore the platform</a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 inset-x-0 h-16" style="background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);"></div>
+  </section>
+
+  <!-- ================= WHY WE EXIST ================= -->
+  <section class="relative py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div class="lg:col-span-6" data-reveal>
+          <p class="eyebrow text-valo-600 mb-4 flex items-center gap-3"><span class="inline-block w-5 h-px" style="background:#029491;"></span>Why we exist</p>
+          <h2 class="font-display font-extrabold text-3xl sm:text-[2.4rem] leading-[1.12]">The systems that hold trust were never built for it</h2>
+          <p class="body-copy mt-5 text-lg text-neutral-600">Organisations that manage funds for others have been stitching together spreadsheets, finance tools and case systems that were never designed to talk to each other. The result is duplicated effort, slow reporting and money that is hard to trace back to the people it was meant for.</p>
+          <p class="body-copy text-lg text-neutral-600 mt-5">We started Valo to fix that. One platform where identity, money, data and outcomes finally live together, built specifically for the high-trust, high-accountability world of social investment.</p>
+        </div>
+        <div class="lg:col-span-6" data-reveal>
+          <div class="codecard" id="codecard">
+            <div class="cc-bar">
+              <span class="cc-dots"><i></i><i></i><i></i></span>
+              <span class="cc-title">what we bring together</span>
+            </div>
+            <div class="p-6 grid gap-4">
+              <div class="flex items-center gap-3" data-cc-row>
+                <span class="cc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01"/></svg></span>
+                <span><span class="block text-white font-bold">Identity &amp; records</span><span class="block text-sm" style="color: rgba(232,241,239,.6);">One trusted profile, under your brand</span></span>
+              </div>
+              <div class="flex items-center gap-3" data-cc-row>
+                <span class="cc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+                <span><span class="block text-white font-bold">Money &amp; budgets</span><span class="block text-sm" style="color: rgba(232,241,239,.6);">Every dollar traceable to a person</span></span>
+              </div>
+              <div class="flex items-center gap-3" data-cc-row>
+                <span class="cc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+                <span><span class="block text-white font-bold">Data &amp; insight</span><span class="block text-sm" style="color: rgba(232,241,239,.6);">Connected, secure, always current</span></span>
+              </div>
+              <div class="flex items-center gap-3" data-cc-row>
+                <span class="cc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+                <span><span class="block text-white font-bold">Outcomes</span><span class="block text-sm" style="color: rgba(232,241,239,.6);">Proof of the difference you make</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRINCIPLES ================= -->
+  <section class="relative py-20 lg:py-24 bg-neutral-50" style="border-top: 1px solid #EDF1F1; border-bottom: 1px solid #EDF1F1;">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow text-valo-600 mb-4 flex items-center gap-3"><span class="inline-block w-5 h-px" style="background:#029491;"></span>What we believe</p>
+        <h2 class="font-display font-extrabold text-3xl sm:text-[2.4rem] leading-[1.12]">The principles we build by</h2>
+        <p class="body-copy mt-5 text-lg text-neutral-600">These are the ideas that shape every product decision we make, from the smallest setting to the shape of the whole platform.</p>
+      </div>
+
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="principle-grid">
+        <div class="value-card" data-reveal>
+          <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/></svg></span>
+          <h3 class="font-display font-bold text-lg mt-4">Trust is the whole job</h3>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-2.5">Not bolted on afterwards. The controls that protect your funds and your data are part of the platform itself.</p>
+        </div>
+        <div class="value-card" data-reveal>
+          <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <h3 class="font-display font-bold text-lg mt-4">People before process</h3>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-2.5">Behind every payment and every record is a person being supported. We build for the coordinators, carers and finance teams who make that support real.</p>
+        </div>
+        <div class="value-card" data-reveal>
+          <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m7 14 4-4 4 4 5-6"/></svg></span>
+          <h3 class="font-display font-bold text-lg mt-4">Outcomes, not just outputs</h3>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-2.5">It is not enough to move money. We help organisations show the difference that money made, so good work can be seen, funded and repeated.</p>
+        </div>
+        <div class="value-card" data-reveal>
+          <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg></span>
+          <h3 class="font-display font-bold text-lg mt-4">Open by default</h3>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-2.5">The product and the platform are the same thing. That means no feature is ever locked away from your own systems.</p>
+        </div>
+        <div class="value-card" data-reveal>
+          <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></span>
+          <h3 class="font-display font-bold text-lg mt-4">Configurable, not rigid</h3>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-2.5">No two organisations work the same way. Valo bends to fit how you actually operate, instead of forcing you to change to suit the software.</p>
+        </div>
+        <div class="value-card" data-reveal>
+          <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12.5 11.17 16.66a2 2 0 0 0 1.66 0L22 12.5"/><path d="M2 17 11.17 21.16a2 2 0 0 0 1.66 0L22 17"/><path d="m2 8 9.17 4.16a2 2 0 0 0 1.66 0L22 8l-9.17-4.16a2 2 0 0 0-1.66 0Z"/></svg></span>
+          <h3 class="font-display font-bold text-lg mt-4">Built to last</h3>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-2.5">Cloud-native, secure and always improving. We are building infrastructure that organisations can rely on for the long haul.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEAM ================= -->
+  <section class="relative py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow text-valo-600 mb-4 flex items-center gap-3"><span class="inline-block w-5 h-px" style="background:#029491;"></span>The people behind Valo</p>
+        <h2 class="font-display font-extrabold text-3xl sm:text-[2.4rem] leading-[1.12]">A senior, kind team</h2>
+        <p class="body-copy mt-5 text-lg text-neutral-600">The people leading Valo, from technology and the social sector to the highest levels of public finance.</p>
+      </div>
+
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="team-grid">
+        <div class="team-card" data-reveal>
+          <div class="team-photo"><img src="brand_assets/team-ben-irving.jpg" alt="Ben Irving, Chief Executive" /></div>
+          <div class="p-6">
+            <h3 class="font-display font-bold text-xl">Ben Irving</h3>
+            <p class="font-mono text-xs text-valo-700 mt-1 uppercase tracking-[.08em]">Chief Executive</p>
+            <p class="body-copy text-[.9375rem] text-neutral-600 mt-3">Leads Valo and its mission. Ben brings years across technology and the social sector, and keeps the whole team focused on the people every fund is meant to serve.</p>
+          </div>
+        </div>
+        <div class="team-card" data-reveal>
+          <div class="team-photo"><img src="brand_assets/team-louis-goodier.jpg" alt="Louis Goodier, Chief Technology Officer" /></div>
+          <div class="p-6">
+            <h3 class="font-display font-bold text-xl">Louis Goodier</h3>
+            <p class="font-mono text-xs text-valo-700 mt-1 uppercase tracking-[.08em]">Chief Technology Officer</p>
+            <p class="body-copy text-[.9375rem] text-neutral-600 mt-3">Owns the platform and the engineering behind it. Louis builds the secure, cloud-native foundations Valo runs on, and believes good infrastructure should be invisible and unbreakable.</p>
+          </div>
+        </div>
+        <div class="team-card" data-reveal>
+          <div class="team-photo"><img src="brand_assets/team-bill-english.jpg" alt="Sir Bill English, Director" /></div>
+          <div class="p-6">
+            <h3 class="font-display font-bold text-xl">Sir Bill English</h3>
+            <p class="font-mono text-xs text-valo-700 mt-1 uppercase tracking-[.08em]">Director</p>
+            <p class="body-copy text-[.9375rem] text-neutral-600 mt-3">A former Prime Minister and Minister of Finance of New Zealand who helped pioneer the social investment approach in government.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JOIN / CONTACT ================= -->
+  <section class="relative py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="relative overflow-hidden rounded-3xl px-8 py-16 sm:px-16 sm:py-20 text-center hero-bg" data-reveal>
+        <div class="grain"></div>
+        <div class="glow-orb" style="width:460px;height:460px;top:-40%;left:50%;margin-left:-230px;background:rgba(84,219,152,.25);"></div>
+        <div class="relative">
+          <img src="brand_assets/mark-white.svg" alt="" class="h-10 w-10 mx-auto mb-7 opacity-90" />
+          <h2 class="font-display font-extrabold text-white text-3xl sm:text-[2.75rem] leading-[1.1] max-w-2xl mx-auto">Help us build software for the work that matters</h2>
+          <p class="body-copy mt-5 text-lg max-w-xl mx-auto" style="color: rgba(232,241,239,.75);">We are a small team taking on a big mission, and we are growing. If you care about doing meaningful work with money, data and outcomes, we would love to hear from you, even if there is no role listed yet.</p>
+          <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
+            <a href="mailto:hello@valo.io" class="btn btn-primary">Say hello</a>
+            <a href="mailto:careers@valo.io" class="btn btn-ghost-dark">careers@valo.io</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-valo-ink relative overflow-hidden">
+    <div class="grain"></div>
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-14">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div>
+          <img src="brand_assets/logo-white-gradient.svg" alt="Valo" class="h-7 w-auto" />
+          <p class="mt-3 text-sm" style="color: rgba(232,241,239,.6);">Turn social investment into social outcomes.</p>
+        </div>
+        <nav class="flex flex-wrap gap-x-7 gap-y-3" aria-label="Footer">
+          <a class="nav-link" href="index.html#platform">Platform</a>
+          <a class="nav-link" href="index.html#products">Products</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="mailto:hello@valo.io">hello@valo.io</a>
+        </nav>
+      </div>
+      <div class="mt-10 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style="border-top: 1px solid rgba(255,255,255,.1);">
+        <p class="font-mono text-xs" style="color: rgba(232,241,239,.68);">© 2026 Valo. Part of Valo One.</p>
+        <p class="font-mono text-xs" style="color: rgba(232,241,239,.68);">Cloud-native · SOC 2 aligned · API-first</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= GSAP ================= -->
+  <script src="vendor/gsap/gsap.min.js"></script>
+  <script src="vendor/gsap/ScrollTrigger.min.js"></script>
+  <script>
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasGsap = !!window.gsap && !reduced;
+
+      /* ---------- Mobile nav ---------- */
+      var burger = document.getElementById('nav-burger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      var burgerOpen = document.getElementById('burger-open');
+      var burgerClose = document.getElementById('burger-close');
+      function setMenu(open) {
+        mobileMenu.hidden = !open;
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        burgerOpen.classList.toggle('hidden', open);
+        burgerClose.classList.toggle('hidden', !open);
+        if (open && hasGsap) {
+          gsap.fromTo(mobileMenu.children,
+            { opacity: 0, y: -8 },
+            { opacity: 1, y: 0, duration: .35, ease: 'power2.out', stagger: .04 });
+        }
+      }
+      burger.addEventListener('click', function () { setMenu(mobileMenu.hidden); });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+
+      if (!hasGsap) return;
+      gsap.registerPlugin(ScrollTrigger);
+      document.documentElement.classList.add('gs-ready');
+
+      var expo = 'expo.out';
+
+      // Load-in
+      var tl = gsap.timeline({ defaults: { ease: expo } });
+      tl.to('#site-nav', { opacity: 1, duration: .8 }, 0)
+        .to('[data-fade]', { opacity: 1, duration: .9, stagger: .14 }, .15);
+
+      // Ambient orb
+      gsap.to('#orb-1', { x: -50, y: 50, duration: 15, ease: 'sine.inOut', repeat: -1, yoyo: true });
+
+      // Code-card rows cascade in as the card reveals
+      gsap.fromTo('#codecard [data-cc-row]',
+        { opacity: 0, x: -16 },
+        {
+          opacity: 1, x: 0, duration: .55, ease: 'expo.out', stagger: .12,
+          scrollTrigger: { trigger: '#codecard', start: 'top 78%', once: true },
+        });
+
+      // Scroll reveals: grids stagger, everything else individually
+      var groups = ['#principle-grid', '#team-grid'];
+      groups.forEach(function (sel) {
+        var items = document.querySelectorAll(sel + ' > [data-reveal]');
+        gsap.to(items, {
+          opacity: 1, y: 0, duration: .9, ease: expo, stagger: .09,
+          scrollTrigger: { trigger: sel, start: 'top 78%', once: true },
+        });
+      });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) {
+        if (el.parentElement && groups.indexOf('#' + el.parentElement.id) !== -1) return;
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 1, ease: expo,
+          scrollTrigger: { trigger: el, start: 'top 82%', once: true },
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
