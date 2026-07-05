@@ -161,6 +161,24 @@ body {
 
 ::selection { background: rgba(84,219,152,.35); }
 
+/* ---------- Mobile performance: drop the expensive paint layers ----------
+   Large blurred orbs, grain blend overlays and backdrop-filter blur force
+   costly compositing on phone GPUs and make every GSAP tween stutter.
+   Visually they are near-invisible at small sizes, so remove them. */
+@media (max-width: 767.98px) {
+  .glow-orb, .sector-orb, .grain { display: none; }
+  #site-nav nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(5, 29, 29, .97) !important;
+  }
+  .sector-chip {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, .92);
+  }
+}
+
 .skip-link {
   position: fixed; top: -100px; left: 1rem; z-index: 100;
   padding: .75rem 1.25rem; border-radius: 999px;

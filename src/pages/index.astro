@@ -651,6 +651,11 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       if (!hasGsap) return;
 
       gsap.registerPlugin(ScrollTrigger);
+      // Mobile browsers resize the viewport when the URL bar hides/shows;
+      // without this every ScrollTrigger recalculates mid-scroll and jumps.
+      ScrollTrigger.config({ ignoreMobileResize: true });
+
+      var isSmall = window.innerWidth < 768;
 
       /* ---------- Hero headline word split (gradient moves onto each word
          so background-clip:text never wraps a transformed child) ---------- */
@@ -721,7 +726,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       // Ambient orb drift (transform only). Skipped on small screens: the
       // orbs are heavily blurred and continuous animation of them drops
       // frames on mobile GPUs.
-      if (window.innerWidth >= 768) {
+      if (!isSmall) {
         gsap.to('#orb-1', { x: -50, y: 60, duration: 14, ease: 'sine.inOut', repeat: -1, yoyo: true });
         gsap.to('#orb-2', { x: 60, y: -40, duration: 17, ease: 'sine.inOut', repeat: -1, yoyo: true });
         gsap.to('#sector-orb-1', { x: 70, y: -40, duration: 19, ease: 'sine.inOut', repeat: -1, yoyo: true });
@@ -737,11 +742,14 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         });
       });
 
-      // Subtle hero dashboard parallax on scroll
-      gsap.to('#hero-dash', {
-        y: -36, ease: 'none',
-        scrollTrigger: { trigger: '#platform', start: 'top top', end: 'bottom top', scrub: true },
-      });
+      // Subtle hero dashboard parallax on scroll. Scrubbed tweens fight the
+      // touch scroll on phones, so desktop only.
+      if (!isSmall) {
+        gsap.to('#hero-dash', {
+          y: -36, ease: 'none',
+          scrollTrigger: { trigger: '#platform', start: 'top top', end: 'bottom top', scrub: true },
+        });
+      }
 
       /* ---------- Scroll reveals ---------- */
       var groups = ['#sector-grid', '#value-grid'];
