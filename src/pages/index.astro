@@ -895,12 +895,12 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       howTl
         .from(howPanel, { opacity: 0, y: 32, duration: .8 })
         .from('.how-head', { opacity: 0, x: -18, duration: .6, stagger: .14 }, .25)
-        .from(howChips, { opacity: 0, y: 14, scale: .8, duration: .5, ease: 'back.out(2)', stagger: .06, clearProps: 'transform,opacity' }, .45)
+        .from(howChips, { opacity: 0, y: 14, duration: .55, stagger: .06, clearProps: 'transform,opacity' }, .45)
         .from('.how-div', { scaleX: 0, duration: .8, ease: 'power3.inOut', stagger: .16 }, .5)
         .from(howProds, { opacity: 0, y: 20, duration: .6, stagger: .1, clearProps: 'transform,opacity' }, .8)
         .from(howConns, { opacity: 0, y: 20, duration: .6, stagger: .1, clearProps: 'transform,opacity' }, 1.1)
         .from('#how-found', { opacity: 0, y: 26, duration: .7 }, 1.35)
-        .from(howTags, { opacity: 0, scale: .8, duration: .45, ease: 'back.out(2)', stagger: .07, clearProps: 'transform,opacity' }, 1.6);
+        .from(howTags, { opacity: 0, y: 10, duration: .5, stagger: .07, clearProps: 'transform,opacity' }, 1.6);
 
     })();
     </script>
