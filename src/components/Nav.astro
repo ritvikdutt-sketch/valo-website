@@ -31,10 +31,13 @@ const logoHref = isAbout ? base + 'index.html' : '#';
           <img src={base + 'brand_assets/logo-white-gradient.svg'} alt="Valo" class="h-6 sm:h-7 w-auto" style="max-width: none;" />
         </a>
         <div class="flex items-center gap-2.5 ml-auto">
-          <div class="hidden md:flex items-center gap-7 mr-4">
+          <div class="hidden md:flex items-center gap-7 mr-4" id="nav-links">
             {links.map((l) => (
               <a class={'nav-link' + (l.current ? ' is-current' : '')} href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a>
             ))}
+            <span class="nav-lamp" id="nav-lamp" aria-hidden="true">
+              <span class="nav-lamp-bar"><i></i><i></i><i></i></span>
+            </span>
           </div>
           <a href={ctaHref} class="btn btn-primary !py-2.5 !px-5 text-sm hidden sm:inline-flex">Book a demo</a>
           <button type="button" id="nav-burger" class="nav-burger md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">

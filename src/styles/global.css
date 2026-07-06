@@ -108,7 +108,30 @@ body {
 .nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
 .nav-link:focus-visible { outline: none; color: #fff; }
 .nav-link.is-current { color: #fff; }
-.nav-link.is-current::after { transform: scaleX(1); }
+
+/* ---------- Tubelight active state ----------
+   The selected link carries the gradient line on TOP (not the hover
+   underline below), with layered blurred glows washing down onto the
+   label. The lamp is one shared element that GSAP springs between links. */
+#nav-links { position: relative; }
+.nav-lamp {
+  position: absolute; top: -3px; bottom: -3px; left: 0; width: 0;
+  border-radius: 999px; background: rgba(84,219,152,.07);
+  pointer-events: none; opacity: 0; will-change: transform;
+}
+.nav-lamp-bar {
+  position: absolute; top: -7px; left: 50%; margin-left: -16px;
+  width: 32px; height: 3px;
+  border-radius: 999px 999px 0 0;
+  background: var(--valo-gradient);
+}
+.nav-lamp-bar i { position: absolute; border-radius: 999px; background: rgba(84,219,152,.25); }
+.nav-lamp-bar i:nth-child(1) { width: 48px; height: 24px; filter: blur(10px); top: -8px; left: -8px; }
+.nav-lamp-bar i:nth-child(2) { width: 32px; height: 24px; filter: blur(10px); top: -4px; left: 0; }
+.nav-lamp-bar i:nth-child(3) { width: 16px; height: 16px; filter: blur(6px); top: 0; left: 8px; }
+.nav-link.lamp-active { color: #fff; text-shadow: 0 0 14px rgba(84,219,152,.55); }
+.nav-link.lamp-active::after, .nav-link.lamp-active:hover::after,
+.nav-link.is-current::after { transform: scaleX(0); }
 
 .nav-burger {
   display: flex; align-items: center; justify-content: center;
