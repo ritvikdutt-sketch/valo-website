@@ -114,6 +114,8 @@ body {
    underline below), with layered blurred glows washing down onto the
    label. The lamp is one shared element that GSAP springs between links. */
 #nav-links { position: relative; }
+/* The lamp replaces the underline in the top nav (footer keeps it) */
+#nav-links .nav-link::after { display: none; }
 .nav-lamp {
   position: absolute; top: -3px; bottom: -3px; left: 0; width: 0;
   border-radius: 999px; background: rgba(84,219,152,.07);
@@ -124,14 +126,41 @@ body {
   width: 32px; height: 3px;
   border-radius: 999px 999px 0 0;
   background: var(--valo-gradient);
+  box-shadow: 0 0 10px rgba(84,219,152,.55);
 }
-.nav-lamp-bar i { position: absolute; border-radius: 999px; background: rgba(84,219,152,.25); }
+.nav-lamp-bar i { position: absolute; border-radius: 999px; background: rgba(84,219,152,.28); }
 .nav-lamp-bar i:nth-child(1) { width: 48px; height: 24px; filter: blur(10px); top: -8px; left: -8px; }
 .nav-lamp-bar i:nth-child(2) { width: 32px; height: 24px; filter: blur(10px); top: -4px; left: 0; }
 .nav-lamp-bar i:nth-child(3) { width: 16px; height: 16px; filter: blur(6px); top: 0; left: 8px; }
+.nav-lamp-under {
+  position: absolute; bottom: -7px; left: 50%; margin-left: -16px;
+  width: 32px; height: 3px;
+  border-radius: 0 0 999px 999px;
+  background: var(--valo-gradient);
+  box-shadow: 0 0 8px rgba(84,219,152,.45);
+}
 .nav-link.lamp-active { color: #fff; text-shadow: 0 0 14px rgba(84,219,152,.55); }
 .nav-link.lamp-active::after, .nav-link.lamp-active:hover::after,
 .nav-link.is-current::after { transform: scaleX(0); }
+
+/* ---------- White frosty top nav ----------
+   The header nav sits on frosted white glass, so its contents flip to ink
+   for contrast. Scoped to #site-nav — the footer reuses .nav-link on dark. */
+#site-nav .nav-link { color: #051D1D; font-weight: 600; }
+#site-nav .nav-link:hover,
+#site-nav .nav-link:focus-visible,
+#site-nav .nav-link.is-current { color: #051D1D; }
+#site-nav .nav-link.lamp-active { color: #051D1D; }
+#site-nav .nav-lamp { background: rgba(84,219,152,.12); }
+#site-nav .nav-burger {
+  color: #051D1D;
+  background: rgba(5,29,29,.05);
+  border-color: rgba(5,29,29,.12);
+}
+#site-nav .nav-burger:hover { background: rgba(5,29,29,.1); }
+#site-nav .mobile-menu { border-top-color: rgba(5,29,29,.08); }
+#site-nav .m-link { color: rgba(5,29,29,.78); }
+#site-nav .m-link:hover { background: rgba(5,29,29,.06); color: #051D1D; }
 
 .nav-burger {
   display: flex; align-items: center; justify-content: center;
@@ -193,7 +222,7 @@ body {
   #site-nav nav {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background: rgba(5, 29, 29, .97) !important;
+    background: #fff !important;
   }
   .sector-chip {
     backdrop-filter: none;

@@ -1,0 +1,18 @@
+import puppeteer from 'puppeteer-core';
+const CHROME = 'C:/Users/ritvi/.cache/puppeteer/chrome/win64-148.0.7778.97/chrome-win64/chrome.exe';
+const url = process.argv[2] || 'http://localhost:4323/valo-website/';
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new' });
+const page = await browser.newPage();
+page.on('pageerror', e => console.log('PAGE ERROR:', e.message));
+await page.setViewport({ width: 1440, height: 900 });
+await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+await page.goto(url, { waitUntil: 'networkidle0' });
+await new Promise(r => setTimeout(r, 2500));
+await page.screenshot({ path: 'temporary screenshots/reduced-hero.png' });
+const stat = await page.evaluate(() => document.getElementById('stat-people')?.textContent);
+console.log('count-up value:', stat);
+await page.evaluate(() => document.getElementById('orbit-stage').scrollIntoView({ block: 'center', behavior: 'instant' }));
+await new Promise(r => setTimeout(r, 2000));
+await page.screenshot({ path: 'temporary screenshots/reduced-orbit.png' });
+await browser.close();
+console.log('done');

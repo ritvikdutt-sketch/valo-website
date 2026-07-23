@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://ritvikdutt-sketch.github.io',
@@ -7,5 +8,5 @@ export default defineConfig({
   // Emit about.html (not about/index.html) so existing URLs and the pages'
   // relative asset paths keep working unchanged.
   build: { format: 'file' },
-  integrations: [tailwind({ applyBaseStyles: false })],
+  integrations: [tailwind({ applyBaseStyles: false }), sitemap()],
 });

@@ -1,0 +1,186 @@
+---
+import Base from '../layouts/Base.astro';
+import { PRODUCTS, PLATFORM_NOTE, CONTACT } from '../data/pages.js';
+
+const { id } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+
+const product = PRODUCTS.find((p) => p.id === id);
+const others = PRODUCTS.filter((p) => p.id !== id);
+
+const ICONS = {
+  building: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
+  card: '<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>',
+  share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
+};
+const icon = (name, size) =>
+  `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+---
+<Base
+  title={`${product.name} — ${product.tagline} | Valo`}
+  description={product.desc}
+  page="sub"
+>
+
+  <!-- Hero -->
+  <section class="hero-bg relative overflow-hidden">
+    <div class="grain"></div>
+    <div class="glow-orb" style={`width:520px;height:520px;top:-16%;right:-6%;background:color-mix(in srgb, ${product.accent} 30%, transparent);`}></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-36 pb-16 lg:pt-44 lg:pb-20">
+      <div class="max-w-3xl">
+        <p class="eyebrow text-valo-300 mb-6 flex items-center gap-3" data-fade>
+          <span class="inline-block w-5 h-px" style="background:#54DB98;"></span>Part of Valo One
+        </p>
+        <div class="flex items-center gap-5" data-fade>
+          <span class="prod-icon" style={`--accent:${product.accent};`} set:html={icon(product.icon, 30)} />
+          <h1 class="font-display font-extrabold text-white leading-[1.06] text-4xl sm:text-5xl lg:text-6xl">{product.name}</h1>
+        </div>
+        <p class="font-mono text-sm uppercase tracking-[.12em] mt-5" style="color: rgba(232,241,239,.75);" data-fade>{product.tagline}</p>
+        <p class="body-copy mt-6 max-w-2xl text-lg" style="color: rgba(232,241,239,.78);" data-fade>{product.desc}</p>
+        <div class="mt-8 flex flex-wrap items-center gap-4" data-fade>
+          <span class="badge-live"><span class="dot"></span>{product.status}</span>
+        </div>
+        <div class="mt-9 flex flex-wrap items-center gap-4" data-fade>
+          <a href={`mailto:${CONTACT}`} class="btn btn-primary">
+            Book a demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href={base + 'index.html#products'} class="btn btn-ghost-dark">Explore the platform</a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 inset-x-0 h-16" style="background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);"></div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="relative py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow text-valo-600 mb-4 flex items-center gap-3"><span class="inline-block w-5 h-px" style="background:#029491;"></span>Capabilities</p>
+        <h2 class="font-display font-extrabold text-3xl sm:text-[2.4rem] leading-[1.12]">{product.tagline}</h2>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 gap-5">
+        {product.feats.map((f) => (
+          <div class="value-card flex items-start gap-4" data-reveal>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={product.accentText} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:4px;"><path d="M20 6 9 17l-5-5"/></svg>
+            <p class="font-display font-bold text-lg leading-snug">{f}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Part of Valo One -->
+  <section class="relative py-16 lg:py-20 bg-neutral-50" style="border-top: 1px solid #EDF1F1; border-bottom: 1px solid #EDF1F1;">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow text-valo-600 mb-4 flex items-center gap-3"><span class="inline-block w-5 h-px" style="background:#029491;"></span>One ecosystem</p>
+        <h2 class="font-display font-extrabold text-3xl sm:text-[2.4rem] leading-[1.12]">Part of Valo One</h2>
+        <p class="body-copy mt-5 text-lg text-neutral-600">{PLATFORM_NOTE}</p>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 gap-5">
+        {others.map((p) => (
+          <a href={base + p.id + '.html'} class="value-card flex items-center gap-4 prod-link" data-reveal>
+            <span class="prod-icon prod-icon-sm" style={`--accent:${p.accent};`} set:html={icon(p.icon, 21)} />
+            <span>
+              <strong class="font-display font-bold text-xl block leading-tight">{p.name}</strong>
+              <span class="text-sm text-neutral-600">{p.tagline}</span>
+            </span>
+            <svg class="ml-auto flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={p.accentText} stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="relative overflow-hidden rounded-3xl px-8 py-14 sm:px-16 sm:py-18 text-center hero-bg" data-reveal>
+        <div class="grain"></div>
+        <div class="relative">
+          <img src={base + 'brand_assets/mark-white.svg'} alt="" class="h-10 w-10 mx-auto mb-6 opacity-90" />
+          <h2 class="font-display font-extrabold text-white text-3xl sm:text-[2.5rem] leading-[1.1] max-w-2xl mx-auto">See your whole social investment in one demo</h2>
+          <p class="body-copy mt-5 text-lg max-w-xl mx-auto" style="color: rgba(232,241,239,.75);">We will walk through Core, Pay and Unify with your own programmes in mind, and show how funding, delivery and outcomes come together in one place.</p>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a href={`mailto:${CONTACT}`} class="btn btn-primary">Book a demo</a>
+            <a href={`mailto:${CONTACT}`} class="btn btn-ghost-dark">{CONTACT}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Fragment slot="scripts">
+    <script is:inline>
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasGsap = !!window.gsap && !reduced;
+
+      /* Mobile nav */
+      var burger = document.getElementById('nav-burger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      var burgerOpen = document.getElementById('burger-open');
+      var burgerClose = document.getElementById('burger-close');
+      function setMenu(open) {
+        mobileMenu.hidden = !open;
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        burgerOpen.classList.toggle('hidden', open);
+        burgerClose.classList.toggle('hidden', !open);
+        if (open && hasGsap) {
+          gsap.fromTo(mobileMenu.children,
+            { opacity: 0, y: -8 },
+            { opacity: 1, y: 0, duration: .35, ease: 'power2.out', stagger: .04 });
+        }
+      }
+      burger.addEventListener('click', function () { setMenu(mobileMenu.hidden); });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+
+      if (!hasGsap) {
+        if (window.gsap && reduced) {
+          gsap.registerPlugin(ScrollTrigger);
+          document.querySelectorAll('[data-fade], [data-reveal]').forEach(function (el) {
+            gsap.fromTo(el, { opacity: 0 }, {
+              opacity: 1, duration: .8, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+            });
+          });
+        }
+        return;
+      }
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.config({ ignoreMobileResize: true });
+      document.documentElement.classList.add('gs-ready');
+
+      var expo = 'expo.out';
+      var tl = gsap.timeline({ defaults: { ease: expo } });
+      tl.from('#site-nav', { y: -18, duration: .8 }, 0)
+        .to('[data-fade]', { opacity: 1, duration: .9, stagger: .12 }, .15);
+
+      document.querySelectorAll('[data-reveal]').forEach(function (el) {
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 1, ease: expo,
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+        });
+      });
+    })();
+    </script>
+  </Fragment>
+</Base>
+
+<style is:global>
+  .prod-icon {
+    width: 60px; height: 60px; border-radius: 16px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent); color: #fff;
+    box-shadow: 0 12px 30px -10px var(--accent);
+  }
+  .prod-icon-sm { width: 46px; height: 46px; border-radius: 13px; box-shadow: none; }
+  a.prod-link { text-decoration: none; color: inherit; }
+  a.prod-link:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); }
+</style>

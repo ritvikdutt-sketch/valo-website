@@ -288,17 +288,17 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         <div class="px-6 sm:px-10 py-5" id="how-l3">
           <p class="how-head"><span class="eyebrow text-neutral-600">Connectivity</span><span class="how-desc">open by default, so Valo fits the tools you already use</span></p>
           <div class="mt-4 grid sm:grid-cols-3 gap-4">
-            <a href="#contact" class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
+            <a href={base + 'open-apis.html'} class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
               <span class="pp-tile" style="background:#4571E0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/></svg></span>
               <span><strong class="font-display font-bold block leading-tight">Open APIs</strong><span class="text-sm text-neutral-600">Every action, API-first</span></span>
               <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-            <a href="#contact" class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
+            <a href={base + 'open-apis.html#webhooks'} class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
               <span class="pp-tile" style="background:#4571E0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
               <span><strong class="font-display font-bold block leading-tight">Webhooks</strong><span class="text-sm text-neutral-600">Subscribe to any event</span></span>
               <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-            <a href="#contact" class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
+            <a href={base + 'mcp.html'} class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
               <span class="pp-tile" style="background:#4571E0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/></svg></span>
               <span><strong class="font-display font-bold block leading-tight">MCP &amp; AI</strong><span class="text-sm text-neutral-600">Bring your own LLM, safely</span></span>
               <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -585,6 +585,11 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         var badge = live
           ? '<span class="font-mono text-[.625rem] tracking-[.08em] px-2 py-1 rounded-full" style="background:#ECFBF3;color:#07746F;border:1px solid #A6E9C6;">LIVE</span>'
           : '<span class="font-mono text-[.625rem] tracking-[.08em] px-2 py-1 rounded-full" style="background:#EDF1F1;color:#6E7C7B;border:1px solid #DCE3E3;">ROADMAP</span>';
+        // Live products have their own page (core.html, pay.html, unify.html)
+        var more = live
+          ? '<a class="fam-more" href="' + p.id + '.html" aria-label="Learn more about ' + p.name + '">Learn more' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>'
+          : '';
         return '<div class="fam-card">' +
           '<span class="car-ic" style="width:46px;height:46px;border-radius:13px;box-shadow:none;background:color-mix(in srgb, ' + p.accent + ' 12%, #fff);color:' + p.accent + ';">' + svgIcon(p.icon, 21) + '</span>' +
           '<div class="flex items-center gap-2.5 mt-5"><h3 class="font-display font-bold text-xl">' + p.name + '</h3>' + badge + '</div>' +
@@ -593,7 +598,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
             p.feats.slice(0, 3).map(function (f) {
               return '<p class="flex items-start gap-2.5 text-sm font-medium text-neutral-700">' + CHECK_FAM(p.accent) + f + '</p>';
             }).join('') +
-          '</div>' +
+          '</div>' + more +
         '</div>';
       }
 
@@ -648,7 +653,28 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
          GSAP ANIMATIONS (skipped when reduced motion / no GSAP;
          content is fully visible without them)
          ============================================================ */
-      if (!hasGsap) return;
+      if (!hasGsap) {
+        if (window.gsap && reduced) {
+          /* Reduced motion: nothing moves, but the page still breathes —
+             sections fade in place and the numbers still count up. */
+          gsap.registerPlugin(ScrollTrigger);
+          document.querySelectorAll('[data-count]').forEach(function (el) {
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            var obj = { v: 0 };
+            gsap.to(obj, {
+              v: target, duration: 1.2, ease: 'power2.out',
+              onUpdate: function () { el.textContent = Math.round(obj.v).toLocaleString('en-NZ'); },
+            });
+          });
+          document.querySelectorAll('[data-fade], [data-reveal]').forEach(function (el) {
+            gsap.fromTo(el, { opacity: 0 }, {
+              opacity: 1, duration: .8, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+            });
+          });
+        }
+        return;
+      }
 
       gsap.registerPlugin(ScrollTrigger);
       // Mobile browsers resize the viewport when the URL bar hides/shows;
@@ -690,7 +716,9 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       /* ---------- Page-load hero timeline ---------- */
       var tl = gsap.timeline({ defaults: { ease: expo } });
 
-      tl.to('#site-nav', { opacity: 1, duration: .8 }, 0)
+      // Slide the nav in without touching opacity — animating opacity on the
+      // fixed header breaks its backdrop-filter frost in Chrome.
+      tl.from('#site-nav', { y: -18, duration: .8 }, 0)
         .to('#platform .eyebrow[data-fade]', { opacity: 1, duration: .6 }, .15)
         .to('.hero-word', { opacity: 1, y: 0, duration: 1, stagger: .05 }, .25)
         .to('#platform p[data-fade], #platform div[data-fade]:not(#hero-dash)', {
@@ -1095,6 +1123,16 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     will-change: transform;
   }
   .fam-card:hover { transform: translateY(-4px) scale(1.02); border-color: #A6E9C6; }
+  .fam-more {
+    display: inline-flex; align-items: center; gap: .375rem;
+    margin-top: 1.25rem; font-weight: 600; font-size: .875rem;
+    color: #07746F;
+    transition: color .18s ease;
+  }
+  .fam-more:hover { color: #051D1D; }
+  .fam-more:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); border-radius: 6px; }
+  .fam-more svg { transition: transform .2s cubic-bezier(.22,1,.36,1); }
+  .fam-more:hover svg { transform: translateX(3px); }
 
   .car-ic {
     width: 54px; height: 54px; border-radius: 15px; flex-shrink: 0;

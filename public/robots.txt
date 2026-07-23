@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ritvikdutt-sketch.github.io/valo-website/sitemap-index.xml

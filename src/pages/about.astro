@@ -205,7 +205,19 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         a.addEventListener('click', function () { setMenu(false); });
       });
 
-      if (!hasGsap) return;
+      if (!hasGsap) {
+        if (window.gsap && reduced) {
+          /* Reduced motion: fade sections in place, nothing moves. */
+          gsap.registerPlugin(ScrollTrigger);
+          document.querySelectorAll('[data-fade], [data-reveal]').forEach(function (el) {
+            gsap.fromTo(el, { opacity: 0 }, {
+              opacity: 1, duration: .8, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+            });
+          });
+        }
+        return;
+      }
       gsap.registerPlugin(ScrollTrigger);
       // Mobile browsers resize the viewport when the URL bar hides/shows;
       // without this every ScrollTrigger recalculates mid-scroll and jumps.
@@ -216,7 +228,9 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
       // Load-in
       var tl = gsap.timeline({ defaults: { ease: expo } });
-      tl.to('#site-nav', { opacity: 1, duration: .8 }, 0)
+      // Slide the nav in without touching opacity — animating opacity on the
+      // fixed header breaks its backdrop-filter frost in Chrome.
+      tl.from('#site-nav', { y: -18, duration: .8 }, 0)
         .to('[data-fade]', { opacity: 1, duration: .9, stagger: .14 }, .15);
 
       // Ambient orb (desktop only; the orb is hidden on mobile for performance)

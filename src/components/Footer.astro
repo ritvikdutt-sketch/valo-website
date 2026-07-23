@@ -2,21 +2,18 @@
 const { page = 'home' } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
-const isAbout = page === 'about';
+const onHome = page === 'home';
+const anchor = (id) => (onHome ? '#' + id : base + 'index.html#' + id);
 
-const links = isAbout
-  ? [
-      { href: base + 'index.html#platform', label: 'Platform' },
-      { href: base + 'index.html#products', label: 'Products' },
-      { href: base + 'about.html', label: 'About' },
-      { href: 'mailto:hello@valo.io', label: 'hello@valo.io' },
-    ]
-  : [
-      { href: '#platform', label: 'Platform' },
-      { href: '#products', label: 'Products' },
-      { href: '#trust', label: 'Why Valo' },
-      { href: 'mailto:hello@valo.io', label: 'hello@valo.io' },
-    ];
+const links = [
+  { href: anchor('platform'), label: 'Platform' },
+  { href: anchor('products'), label: 'Products' },
+  { href: base + 'about.html', label: 'About' },
+  { href: base + 'open-apis.html', label: 'Open APIs' },
+  { href: base + 'mcp.html', label: 'MCP & AI' },
+  { href: base + 'security.html', label: 'Security' },
+  { href: 'mailto:hello@valo.io', label: 'hello@valo.io' },
+];
 ---
 <footer class="bg-valo-ink relative overflow-hidden">
   <div class="grain"></div>

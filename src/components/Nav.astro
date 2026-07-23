@@ -2,33 +2,28 @@
 const { page = 'home' } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const onHome = page === 'home';
 const isAbout = page === 'about';
+const anchor = (id) => (onHome ? '#' + id : base + 'index.html#' + id);
 
-const links = isAbout
-  ? [
-      { href: base + 'index.html#products', label: 'Platform' },
-      { href: base + 'index.html#family', label: 'Products' },
-      { href: base + 'index.html#trust', label: 'Why Valo' },
-      { href: base + 'about.html', label: 'About', current: true },
-    ]
-  : [
-      { href: '#products', label: 'Platform' },
-      { href: '#family', label: 'Products' },
-      { href: '#trust', label: 'Why Valo' },
-      { href: base + 'about.html', label: 'About' },
-    ];
+const links = [
+  { href: anchor('products'), label: 'Platform' },
+  { href: anchor('family'), label: 'Products' },
+  { href: anchor('trust'), label: 'Why Valo' },
+  { href: base + 'about.html', label: 'About', current: isAbout },
+];
 
-const ctaHref = isAbout ? 'mailto:hello@valo.io' : '#contact';
-const logoHref = isAbout ? base + 'index.html' : '#';
+const ctaHref = onHome ? '#contact' : 'mailto:hello@valo.io';
+const logoHref = onHome ? '#' : base + 'index.html';
 ---
-<header id="site-nav" class="fixed top-0 inset-x-0 z-50" data-fade>
+<header id="site-nav" class="fixed top-0 inset-x-0 z-50">
   <div class="mx-auto max-w-7xl px-5 sm:px-8">
     <nav class="mt-4 rounded-2xl px-4 sm:px-5 py-3"
-         style="background: rgba(5,29,29,.92); backdrop-filter: blur(22px) saturate(1.4); -webkit-backdrop-filter: blur(22px) saturate(1.4); border: 1px solid rgba(255,255,255,.09); box-shadow: 0 8px 32px -12px rgba(0,0,0,.45);"
+         style="background: rgba(255,255,255,.88); backdrop-filter: blur(28px) saturate(1.5); -webkit-backdrop-filter: blur(28px) saturate(1.5); border: 1px solid rgba(5,29,29,.08); box-shadow: 0 8px 32px -12px rgba(5,29,29,.18);"
          aria-label="Main">
       <div class="flex items-center justify-between gap-3">
         <a href={logoHref} class="flex items-center flex-shrink-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--focus-ring)] rounded-lg" aria-label="Valo home">
-          <img src={base + 'brand_assets/logo-white-gradient.svg'} alt="Valo" class="h-6 sm:h-7 w-auto" style="max-width: none;" />
+          <img src={base + 'brand_assets/logo-primary.svg'} alt="Valo" class="h-6 sm:h-7 w-auto" style="max-width: none;" />
         </a>
         <div class="flex items-center gap-2.5 ml-auto">
           <div class="hidden md:flex items-center gap-7 mr-4" id="nav-links">
@@ -37,6 +32,7 @@ const logoHref = isAbout ? base + 'index.html' : '#';
             ))}
             <span class="nav-lamp" id="nav-lamp" aria-hidden="true">
               <span class="nav-lamp-bar"><i></i><i></i><i></i></span>
+              <span class="nav-lamp-under"></span>
             </span>
           </div>
           <a href={ctaHref} class="btn btn-primary !py-2.5 !px-5 text-sm hidden sm:inline-flex">Book a demo</a>
@@ -50,7 +46,7 @@ const logoHref = isAbout ? base + 'index.html' : '#';
         {links.map((l) => (
           <a class="m-link" href={l.href}>{l.label}</a>
         ))}
-        {!isAbout && <a class="m-link" href="#contact">Contact</a>}
+        {onHome && <a class="m-link" href="#contact">Contact</a>}
         <a href={ctaHref} class="btn btn-primary w-full mt-2 text-sm">Book a demo</a>
       </div>
     </nav>

@@ -1,0 +1,12 @@
+import puppeteer from 'puppeteer-core';
+const CHROME = 'C:/Users/ritvi/.cache/puppeteer/chrome/win64-148.0.7778.97/chrome-win64/chrome.exe';
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new' });
+const page = await browser.newPage();
+await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
+await page.goto(process.argv[2] || 'http://localhost:4323/valo-website/', { waitUntil: 'networkidle0' });
+await new Promise(r => setTimeout(r, 3000));
+await page.click('#nav-burger');
+await new Promise(r => setTimeout(r, 1000));
+await page.screenshot({ path: 'temporary screenshots/whitenav-mobile-menu.png' });
+await browser.close();
+console.log('done');
