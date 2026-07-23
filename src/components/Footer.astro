@@ -1,13 +1,11 @@
 ---
-const { page = 'home' } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
-const onHome = page === 'home';
-const anchor = (id) => (onHome ? '#' + id : base + 'index.html#' + id);
 
 const links = [
-  { href: anchor('platform'), label: 'Platform' },
-  { href: anchor('products'), label: 'Products' },
+  { href: base + 'platform.html', label: 'Platform' },
+  { href: base + 'products.html', label: 'Products' },
+  { href: base + 'why-valo.html', label: 'Why Valo' },
   { href: base + 'about.html', label: 'About' },
   { href: base + 'open-apis.html', label: 'Open APIs' },
   { href: base + 'mcp.html', label: 'MCP & AI' },
@@ -23,7 +21,7 @@ const links = [
         <img src={base + 'brand_assets/logo-white-gradient.svg'} alt="Valo" class="h-7 w-auto" />
         <p class="mt-3 text-sm" style="color: rgba(232,241,239,.6);">Turn social investment into social outcomes.</p>
       </div>
-      <nav class="flex flex-wrap gap-x-7 gap-y-3" aria-label="Footer">
+      <nav class="flex flex-wrap gap-x-7 gap-y-3 md:max-w-md md:justify-end" aria-label="Footer">
         {links.map((l) => (
           <a class="nav-link" href={l.href}>{l.label}</a>
         ))}

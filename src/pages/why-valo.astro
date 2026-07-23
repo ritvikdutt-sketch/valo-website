@@ -1,0 +1,277 @@
+---
+import Base from '../layouts/Base.astro';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+---
+<Base
+  title="Why Valo — Everyone works from a single source of truth | Valo"
+  description="Participants, providers and funders all meet on one platform. Valo One runs the work in the middle, while one identity, one shared record and secure data exchange sit underneath, keeping funding, delivery and outcomes connected."
+  page="why-valo"
+>
+
+  <!-- Hero -->
+  <section class="hero-bg relative overflow-hidden">
+    <div class="grain"></div>
+    <div class="glow-orb" style="width:520px;height:520px;top:-16%;right:-6%;background:rgba(2,148,145,.32);"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-36 pb-16 lg:pt-44 lg:pb-20">
+      <div class="max-w-3xl">
+        <p class="eyebrow text-valo-300 mb-6 flex items-center gap-3" data-fade><span class="inline-block w-5 h-px" style="background:#54DB98;"></span>How it works</p>
+        <h1 class="font-display font-extrabold text-white leading-[1.08] text-4xl sm:text-5xl lg:text-6xl" data-fade>Everyone works from a single source of truth</h1>
+        <p class="body-copy mt-7 max-w-2xl text-lg" style="color: rgba(232,241,239,.78);" data-fade>Participants, providers and funders all meet on one platform. Valo One runs the work in the middle, while one identity, one shared record and secure data exchange sit underneath, keeping funding, delivery and outcomes connected.</p>
+      </div>
+    </div>
+    <div class="absolute bottom-0 inset-x-0 h-16" style="background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);"></div>
+  </section>
+
+  <!-- ================= PLATFORM DIAGRAM ================= -->
+  <section class="relative pt-10 pb-16 lg:pb-20">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+      <!-- Platform diagram (structure and copy from valo.io) -->
+      <div id="how-panel" class="rounded-3xl overflow-hidden relative" style="background: #fff; border: 1px solid #DCE3E3; box-shadow: var(--shadow-card);">
+        <!-- Layer 1: People & channels -->
+        <div class="px-6 sm:px-10 py-5" id="how-l1">
+          <p class="how-head"><span class="eyebrow text-neutral-600">People &amp; channels</span><span class="how-desc">everyone who touches a fund</span></p>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <span class="how-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#029491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Participants</span>
+            <span class="how-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#029491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/></svg>Providers</span>
+            <span class="how-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#029491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01"/></svg>Staff &amp; admins</span>
+            <span class="how-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#029491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="22" x2="21" y2="22"/><path d="M6 18v-7M10 18v-7M14 18v-7M18 18v-7"/><path d="m12 2 10 5H2Z"/></svg>Funders</span>
+            <span class="how-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#029491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg>Auditors</span>
+          </div>
+        </div>
+
+        <div class="how-div"></div>
+
+        <!-- Layer 2: Valo One orchestration -->
+        <div class="px-6 sm:px-10 py-5" id="how-l2">
+          <p class="how-head"><span class="eyebrow text-neutral-600">Valo One orchestration</span><span class="how-desc">the products that run the day to day</span></p>
+          <div class="mt-4 grid sm:grid-cols-3 gap-4">
+            <a href={base + 'core.html'} class="how-card" style="background:#ECFBF3; border-color:#A6E9C6;">
+              <span class="pp-tile" style="background:#029491;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01"/></svg></span>
+              <span><strong class="font-display font-bold block leading-tight">Valo Core</strong><span class="text-sm text-neutral-600">Identity &amp; records</span></span>
+              <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#07746F;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href={base + 'pay.html'} class="how-card" style="background:#FCEDED; border-color:rgba(224,72,74,.3);">
+              <span class="pp-tile" style="background:#E0484A;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+              <span><strong class="font-display font-bold block leading-tight">Valo Pay</strong><span class="text-sm text-neutral-600">Ledger &amp; payments</span></span>
+              <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#B9383B;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href={base + 'unify.html'} class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
+              <span class="pp-tile" style="background:#4571E0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span><strong class="font-display font-bold block leading-tight">Valo Unify</strong><span class="text-sm text-neutral-600">Data integration &amp; insight</span></span>
+              <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#3A5FC8;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="how-div"></div>
+
+        <!-- Layer 3: Connectivity -->
+        <div class="px-6 sm:px-10 py-5" id="how-l3">
+          <p class="how-head"><span class="eyebrow text-neutral-600">Connectivity</span><span class="how-desc">open by default, so Valo fits the tools you already use</span></p>
+          <div class="mt-4 grid sm:grid-cols-3 gap-4">
+            <a href={base + 'open-apis.html'} class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
+              <span class="pp-tile" style="background:#4571E0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/></svg></span>
+              <span><strong class="font-display font-bold block leading-tight">Open APIs</strong><span class="text-sm text-neutral-600">Every action, API-first</span></span>
+              <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href={base + 'open-apis.html#webhooks'} class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
+              <span class="pp-tile" style="background:#4571E0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+              <span><strong class="font-display font-bold block leading-tight">Webhooks</strong><span class="text-sm text-neutral-600">Subscribe to any event</span></span>
+              <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href={base + 'mcp.html'} class="how-card" style="background:rgba(69,113,224,.07); border-color:rgba(69,113,224,.28);">
+              <span class="pp-tile" style="background:#4571E0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/></svg></span>
+              <span><strong class="font-display font-bold block leading-tight">MCP &amp; AI</strong><span class="text-sm text-neutral-600">Bring your own LLM, safely</span></span>
+              <svg class="pp-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Foundation -->
+        <div class="bg-valo-ink px-6 sm:px-10 py-5 relative overflow-hidden" id="how-found">
+          <div class="grain"></div>
+          <div class="relative flex items-start gap-4">
+            <span class="flex items-center justify-center w-11 h-11 rounded-xl flex-shrink-0" id="how-mark" style="background: var(--valo-gradient); will-change: transform;">
+              <img src={base + 'brand_assets/mark-white.svg'} alt="" class="h-6 w-6" />
+            </span>
+            <div>
+              <h2 class="font-display font-bold text-white text-lg leading-tight">One identity · one record · one source of truth</h2>
+              <p class="text-sm mt-1" style="color: rgba(232,241,239,.72);">The shared foundation every Valo product is built on, all under your brand</p>
+            </div>
+          </div>
+          <div class="relative mt-4 flex flex-wrap gap-3">
+            <span class="pf-tag">verified identity</span>
+            <span class="pf-tag">shared records</span>
+            <span class="pf-tag">secure data exchange</span>
+            <span class="pf-tag">MCP connectivity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Value props -->
+      <div class="mt-8 grid sm:grid-cols-3 gap-5" id="value-grid">
+        <div class="value-card" data-reveal>
+          <div class="flex items-center gap-4">
+            <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+            <h2 class="font-display font-bold text-lg">Configurable, not bespoke</h2>
+          </div>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-4">Shape funds, rules and service pathways around the way your organisation actually works. No custom build for every programme or client.</p>
+        </div>
+
+        <div class="value-card" data-reveal>
+          <div class="flex items-center gap-4">
+            <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h2 class="font-display font-bold text-lg">Compliant by design</h2>
+          </div>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-4">Governance, permissions and a full audit trail come built in, so reporting and assurance for your funders is there when you need it.</p>
+        </div>
+
+        <div class="value-card" data-reveal>
+          <div class="flex items-center gap-4">
+            <span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+            <h2 class="font-display font-bold text-lg">Outcomes you can prove</h2>
+          </div>
+          <p class="body-copy text-[.9375rem] text-neutral-600 mt-4">Funding, delivery and results all sit on one record, so you can show the difference every dollar made, not just where it went.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="relative pb-16 lg:pb-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="relative overflow-hidden rounded-3xl px-8 py-14 sm:px-16 sm:py-18 text-center hero-bg" data-reveal>
+        <div class="grain"></div>
+        <div class="relative">
+          <img src={base + 'brand_assets/mark-white.svg'} alt="" class="h-10 w-10 mx-auto mb-6 opacity-90" />
+          <h2 class="font-display font-extrabold text-white text-3xl sm:text-[2.5rem] leading-[1.1] max-w-2xl mx-auto">See your whole social investment in one demo</h2>
+          <p class="body-copy mt-5 text-lg max-w-xl mx-auto" style="color: rgba(232,241,239,.75);">We will walk through Core, Pay and Unify with your own programmes in mind, and show how funding, delivery and outcomes come together in one place.</p>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a href="mailto:hello@valo.io" class="btn btn-primary">Book a demo</a>
+            <a href="mailto:hello@valo.io" class="btn btn-ghost-dark">hello@valo.io</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Fragment slot="scripts">
+    <script is:inline>
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasGsap = !!window.gsap && !reduced;
+
+      /* Mobile nav */
+      var burger = document.getElementById('nav-burger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      var burgerOpen = document.getElementById('burger-open');
+      var burgerClose = document.getElementById('burger-close');
+      function setMenu(open) {
+        mobileMenu.hidden = !open;
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        burgerOpen.classList.toggle('hidden', open);
+        burgerClose.classList.toggle('hidden', !open);
+        if (open && hasGsap) {
+          gsap.fromTo(mobileMenu.children,
+            { opacity: 0, y: -8 },
+            { opacity: 1, y: 0, duration: .35, ease: 'power2.out', stagger: .04 });
+        }
+      }
+      burger.addEventListener('click', function () { setMenu(mobileMenu.hidden); });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+
+      if (!hasGsap) {
+        if (window.gsap && reduced) {
+          gsap.registerPlugin(ScrollTrigger);
+          document.querySelectorAll('[data-fade], [data-reveal]').forEach(function (el) {
+            gsap.fromTo(el, { opacity: 0 }, {
+              opacity: 1, duration: .8, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+            });
+          });
+        }
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.config({ ignoreMobileResize: true });
+      document.documentElement.classList.add('gs-ready');
+
+      var expo = 'expo.out';
+      var tl = gsap.timeline({ defaults: { ease: expo } });
+      tl.from('#site-nav', { y: -18, duration: .8 }, 0)
+        .to('[data-fade]', { opacity: 1, duration: .9, stagger: .12 }, .15);
+
+      document.querySelectorAll('[data-reveal]').forEach(function (el) {
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 1, ease: expo,
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+        });
+      });
+
+      /* ---------- Layered diagram stacks into place ---------- */
+      var howPanel = document.getElementById('how-panel');
+      var howChips = gsap.utils.toArray('#how-l1 .how-chip');
+      var howProds = gsap.utils.toArray('#how-l2 .how-card');
+      var howConns = gsap.utils.toArray('#how-l3 .how-card');
+      var howTags = gsap.utils.toArray('#how-found .pf-tag');
+
+      var howTl = gsap.timeline({
+        defaults: { ease: expo },
+        scrollTrigger: { trigger: howPanel, start: 'top 80%', once: true },
+      });
+      howTl
+        .from(howPanel, { opacity: 0, y: 32, duration: .8 })
+        .from('.how-head', { opacity: 0, x: -18, duration: .6, stagger: .14 }, .25)
+        .from(howChips, { opacity: 0, y: 14, duration: .55, stagger: .06, clearProps: 'transform,opacity' }, .45)
+        .from('.how-div', { scaleX: 0, duration: .8, ease: 'power3.inOut', stagger: .16 }, .5)
+        .from(howProds, { opacity: 0, y: 20, duration: .6, stagger: .1, clearProps: 'transform,opacity' }, .8)
+        .from(howConns, { opacity: 0, y: 20, duration: .6, stagger: .1, clearProps: 'transform,opacity' }, 1.1)
+        .from('#how-found', { opacity: 0, y: 26, duration: .7 }, 1.35)
+        .from(howTags, { opacity: 0, y: 10, duration: .5, stagger: .07, clearProps: 'transform,opacity' }, 1.6);
+    })();
+    </script>
+  </Fragment>
+</Base>
+
+<style is:global>
+  /* ---------- How it works: layered platform diagram ---------- */
+  .how-head { display: flex; align-items: baseline; gap: .875rem; flex-wrap: wrap; }
+  .how-desc { font-size: .9375rem; color: #6E7C7B; }
+  .how-div { height: 1px; background: #EDF1F1; transform-origin: left; }
+  .how-chip {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .625rem 1rem; border-radius: 12px;
+    border: 1px solid #DCE3E3; background: #fff;
+    font-weight: 600; font-size: .9375rem; will-change: transform;
+    transition: transform .2s cubic-bezier(.34,1.56,.64,1), border-color .2s ease;
+  }
+  .how-chip:hover { transform: translateY(-2px); border-color: #A6E9C6; }
+  .how-card {
+    display: flex; align-items: center; gap: .875rem;
+    padding: 1rem 1.125rem; border-radius: 14px; border: 1px solid;
+    will-change: transform;
+    transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+  }
+  .how-card:hover { transform: translateY(-3px); }
+  a.how-card:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); }
+  .pp-tile {
+    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; color: #fff;
+  }
+  .pp-go { margin-left: auto; flex-shrink: 0; color: #4571E0; transition: transform .2s cubic-bezier(.22,1,.36,1); }
+  a.how-card:hover .pp-go { transform: translateX(4px); }
+  .pf-tag {
+    font-family: "JetBrains Mono", monospace; font-size: .75rem; font-weight: 500;
+    padding: .4375rem .875rem; border-radius: 999px;
+    color: #54DB98; background: rgba(84,219,152,.08); border: 1px solid rgba(84,219,152,.35);
+    will-change: transform;
+  }
+</style>

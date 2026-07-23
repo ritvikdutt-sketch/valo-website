@@ -1,6 +1,6 @@
 // Markdown mirrors of every page, for agents — same convention as valo.io
 // (each page has a .md twin, indexed by /llms.txt).
-import { PRODUCTS, AREAS, PLATFORM_NOTE, HOME_MD, ABOUT_MD, CONTACT } from './pages.js';
+import { PRODUCTS, ALL_PRODUCTS, AREAS, PLATFORM_NOTE, VALUE_PROPS, HOME_MD, ABOUT_MD, CONTACT } from './pages.js';
 
 const FOOTER = `---\n\nPart of Valo One. Get in touch: ${CONTACT}.`;
 
@@ -55,15 +55,53 @@ ${HOME_MD.sub}
 
 ${HOME_MD.sectors.map((s) => `- ${s}`).join('\n')}
 
-## One platform. Seven products.
+See also: [platform.md](platform.md), [products.md](products.md), [why-valo.md](why-valo.md).
 
-${PLATFORM_NOTE}
+${FOOTER}
+`;
+}
 
-In production today: ${PRODUCTS.map((p) => `${p.name} (${p.tagline})`).join(' · ')}. On the roadmap: Valo Care, Valo Health, Valo Marketplace, Valo Engage.
+function platformMd() {
+  return `# Platform — One platform. Seven products.
 
-## Everyone works from a single source of truth
+> ${PLATFORM_NOTE}
 
-${HOME_MD.trust}
+In production today: ${PRODUCTS.map((p) => `${p.name} (${p.tagline})`).join(' · ')}.
+On the roadmap: Valo Care, Valo Health, Valo Marketplace, Valo Engage.
+
+${PRODUCTS.map((p) => `## ${p.name}\n\n${p.desc}`).join('\n\n')}
+
+${FOOTER}
+`;
+}
+
+function productsMd() {
+  return `# Products — Built to switch on, one product at a time
+
+> Three products run live operations today. Four more are on the way as your model grows. Each one has a clear identity of its own, and all of them are built on the same Valo core.
+
+## In production
+
+${PRODUCTS.map((p) => `- **${p.name}** (${p.tagline}): ${p.desc}`).join('\n')}
+
+## On the roadmap
+
+${ALL_PRODUCTS.filter((p) => !p.live).map((p) => `- Valo ${p.short}`).join('\n')}
+
+${FOOTER}
+`;
+}
+
+function whyValoMd() {
+  return `# Why Valo — Everyone works from a single source of truth
+
+> ${HOME_MD.trust}
+
+${VALUE_PROPS.map(([t, b]) => `## ${t}\n\n${b}`).join('\n\n')}
+
+## One identity · one record · one source of truth
+
+The shared foundation every Valo product is built on, all under your brand: verified identity, shared records, secure data exchange, MCP connectivity.
 
 ${FOOTER}
 `;
@@ -89,6 +127,9 @@ ${FOOTER}
 export function pageMd(slug) {
   if (slug === 'index') return homeMd();
   if (slug === 'about') return aboutMd();
+  if (slug === 'platform') return platformMd();
+  if (slug === 'products') return productsMd();
+  if (slug === 'why-valo') return whyValoMd();
   const product = PRODUCTS.find((p) => p.id === slug);
   if (product) return productMd(product);
   if (AREAS[slug]) return areaMd(AREAS[slug]);
@@ -97,6 +138,9 @@ export function pageMd(slug) {
 
 export const MD_PAGES = [
   { slug: 'index', title: 'Valo One (Home)', line: HOME_MD.summary },
+  { slug: 'platform', title: 'Platform', line: PLATFORM_NOTE },
+  { slug: 'products', title: 'Products', line: 'Three products run live operations today. Four more are on the way as your model grows.' },
+  { slug: 'why-valo', title: 'Why Valo', line: HOME_MD.trust },
   { slug: 'about', title: 'About Valo', line: ABOUT_MD.summary },
   ...PRODUCTS.map((p) => ({ slug: p.id, title: p.name, line: `${p.tagline}. ${p.desc.split('. ')[0]}.` })),
   { slug: 'open-apis', title: 'Open APIs', line: AREAS['open-apis'].summary },

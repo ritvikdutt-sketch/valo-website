@@ -161,6 +161,7 @@ body {
 #site-nav .mobile-menu { border-top-color: rgba(5,29,29,.08); }
 #site-nav .m-link { color: rgba(5,29,29,.78); }
 #site-nav .m-link:hover { background: rgba(5,29,29,.06); color: #051D1D; }
+#site-nav .m-link.is-current { color: #051D1D; font-weight: 700; background: rgba(84,219,152,.12); }
 
 .nav-burger {
   display: flex; align-items: center; justify-content: center;

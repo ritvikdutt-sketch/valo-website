@@ -3,8 +3,9 @@
 // from the product data already used on the landing page — do not invent
 // new brand claims here.
 //
-// NOTE: src/pages/index.astro keeps its own inline PRODUCTS array (the orbit
-// script needs it at runtime). If product copy changes, update both places.
+// NOTE: public/js/valo-data.js holds the runtime copy of this data (the
+// platform/products page scripts need it in the browser). If product copy
+// changes, update both places.
 
 export const CONTACT = 'hello@valo.io';
 
@@ -52,6 +53,35 @@ export const PRODUCTS = [
 
 // The shared platform paragraph from the landing page (verbatim).
 export const PLATFORM_NOTE = 'Every product shares the same identity, records and data, so funding, delivery and outcomes stay joined up. Start with what you need today and turn the rest on as you grow. There is nothing to re-build and no data to migrate.';
+
+// All seven products (minimal: for the home-page teaser icon row).
+export const ALL_PRODUCTS = [
+  { id: 'core', short: 'Core', icon: 'building', accent: '#029491', live: true },
+  { id: 'pay', short: 'Pay', icon: 'card', accent: '#E0484A', live: true },
+  { id: 'unify', short: 'Unify', icon: 'share', accent: '#4571E0', live: true },
+  { id: 'care', short: 'Care', icon: 'users', accent: '#8A5CF0', live: false },
+  { id: 'health', short: 'Health', icon: 'activity', accent: '#1C8FD1', live: false },
+  { id: 'marketplace', short: 'Marketplace', icon: 'store', accent: '#C8741C', live: false },
+  { id: 'engage', short: 'Engage', icon: 'message', accent: '#D8519E', live: false },
+];
+
+// SVG icon paths shared by the .astro pages (same set as public/js/valo-data.js).
+export const ICON_PATHS = {
+  building: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
+  card: '<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>',
+  share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
+  users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  activity: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+  store: '<path d="M2 7h20l-2 4a3 3 0 0 1-5.2 0 3 3 0 0 1-4.8 0 3 3 0 0 1-4.8 0L2 7Z"/><path d="M4 11v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m2 7 1.7-3.4A1 1 0 0 1 4.6 3h14.8a1 1 0 0 1 .9.6L22 7"/>',
+  message: '<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2Z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+};
+
+// The three value propositions (verbatim from the site).
+export const VALUE_PROPS = [
+  ['Configurable, not bespoke', 'Shape funds, rules and service pathways around the way your organisation actually works. No custom build for every programme or client.'],
+  ['Compliant by design', 'Governance, permissions and a full audit trail come built in, so reporting and assurance for your funders is there when you need it.'],
+  ['Outcomes you can prove', 'Funding, delivery and results all sit on one record, so you can show the difference every dollar made, not just where it went.'],
+];
 
 // Area pages — content verbatim from valo.io/open-apis.md, /mcp.md, /security.md.
 export const AREAS = {
