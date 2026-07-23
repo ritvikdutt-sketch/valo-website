@@ -9,7 +9,7 @@ await page.setViewport({ width: 1440, height: 900 });
 const out = [];
 
 // 1. Every nav link from home lands correctly with aria-current set
-const labels = ['Platform', 'Products', 'Why Valo', 'Open APIs', 'MCP & AI', 'Security', 'About'];
+const labels = ['Platform', 'Why Valo', 'Open APIs', 'MCP & AI', 'Security', 'About'];
 for (const label of labels) {
   await page.goto(ORIGIN, { waitUntil: 'networkidle0' });
   await page.evaluate((l) => {
@@ -34,8 +34,8 @@ const orbit = await page.evaluate(() => ({
 }));
 out.push('platform orbit: ' + JSON.stringify(orbit));
 
-// 3. Products page: tabs render + switch
-await page.goto(ORIGIN + 'products.html', { waitUntil: 'networkidle0' });
+// 3. Platform page family section: tabs render + switch
+await page.goto(ORIGIN + 'platform.html', { waitUntil: 'networkidle0' });
 await new Promise((r) => setTimeout(r, 2000));
 const live = await page.$$eval('#family-grid .fam-card', (c) => c.length);
 await page.click('#fam-tab-road');

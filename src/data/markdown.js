@@ -55,7 +55,7 @@ ${HOME_MD.sub}
 
 ${HOME_MD.sectors.map((s) => `- ${s}`).join('\n')}
 
-See also: [platform.md](platform.md), [products.md](products.md), [why-valo.md](why-valo.md).
+See also: [platform.md](platform.md), [why-valo.md](why-valo.md).
 
 ${FOOTER}
 `;
@@ -66,19 +66,9 @@ function platformMd() {
 
 > ${PLATFORM_NOTE}
 
-In production today: ${PRODUCTS.map((p) => `${p.name} (${p.tagline})`).join(' · ')}.
-On the roadmap: Valo Care, Valo Health, Valo Marketplace, Valo Engage.
+## Built to switch on, one product at a time
 
-${PRODUCTS.map((p) => `## ${p.name}\n\n${p.desc}`).join('\n\n')}
-
-${FOOTER}
-`;
-}
-
-function productsMd() {
-  return `# Products — Built to switch on, one product at a time
-
-> Three products run live operations today. Four more are on the way as your model grows. Each one has a clear identity of its own, and all of them are built on the same Valo core.
+Three products run live operations today. Four more are on the way as your model grows. Each one has a clear identity of its own, and all of them are built on the same Valo core.
 
 ## In production
 
@@ -128,7 +118,6 @@ export function pageMd(slug) {
   if (slug === 'index') return homeMd();
   if (slug === 'about') return aboutMd();
   if (slug === 'platform') return platformMd();
-  if (slug === 'products') return productsMd();
   if (slug === 'why-valo') return whyValoMd();
   const product = PRODUCTS.find((p) => p.id === slug);
   if (product) return productMd(product);
@@ -139,7 +128,6 @@ export function pageMd(slug) {
 export const MD_PAGES = [
   { slug: 'index', title: 'Valo One (Home)', line: HOME_MD.summary },
   { slug: 'platform', title: 'Platform', line: PLATFORM_NOTE },
-  { slug: 'products', title: 'Products', line: 'Three products run live operations today. Four more are on the way as your model grows.' },
   { slug: 'why-valo', title: 'Why Valo', line: HOME_MD.trust },
   { slug: 'about', title: 'About Valo', line: ABOUT_MD.summary },
   ...PRODUCTS.map((p) => ({ slug: p.id, title: p.name, line: `${p.tagline}. ${p.desc.split('. ')[0]}.` })),

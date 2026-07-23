@@ -58,6 +58,26 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     </div>
   </section>
 
+  <!-- ================= PRODUCT FAMILY ================= -->
+  <section class="relative py-16 lg:py-20 bg-neutral-50" id="family" style="border-bottom: 1px solid #EDF1F1;">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow text-valo-600 mb-4 flex items-center gap-3"><span class="inline-block w-5 h-px" style="background:#029491;"></span>Product family</p>
+        <h2 class="font-display font-extrabold text-3xl sm:text-[2.4rem] leading-[1.12]">Built to switch on,<br class="hidden sm:block" /> one product at a time</h2>
+        <p class="body-copy mt-5 text-lg text-neutral-600">Three products run live operations today. Four more are on the way as your model grows. Each one has a clear identity of its own, and all of them are built on the same Valo core.</p>
+      </div>
+
+      <div class="mt-10" data-reveal>
+        <div class="inline-flex items-center gap-1 rounded-full p-1.5" style="background: #EDF1F1; border: 1px solid #DCE3E3;" role="group" aria-label="Filter products by availability">
+          <button type="button" class="fam-tab is-active" id="fam-tab-live" aria-pressed="true" aria-controls="family-grid">In production <span class="fam-count">3</span></button>
+          <button type="button" class="fam-tab" id="fam-tab-road" aria-pressed="false" aria-controls="family-grid">On the roadmap <span class="fam-count">4</span></button>
+        </div>
+      </div>
+
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="family-grid" data-reveal></div>
+    </div>
+  </section>
+
   <!-- ================= CTA ================= -->
   <section class="relative py-16 lg:py-24">
     <div class="mx-auto max-w-7xl px-5 sm:px-8">
@@ -216,6 +236,59 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
       renderCard(PRODUCTS[0]);
       select(0, false);
+
+      /* ---------- Product family: tabbed cards ---------- */
+      var famGrid = document.getElementById('family-grid');
+      var famTabLive = document.getElementById('fam-tab-live');
+      var famTabRoad = document.getElementById('fam-tab-road');
+      var CHECK_FAM = function (accent) {
+        return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="' + accent + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:3px;"><path d="M20 6 9 17l-5-5"/></svg>';
+      };
+
+      function famCard(p) {
+        var live = p.status === 'production';
+        var badge = live
+          ? '<span class="font-mono text-[.625rem] tracking-[.08em] px-2 py-1 rounded-full" style="background:#ECFBF3;color:#07746F;border:1px solid #A6E9C6;">LIVE</span>'
+          : '<span class="font-mono text-[.625rem] tracking-[.08em] px-2 py-1 rounded-full" style="background:#EDF1F1;color:#6E7C7B;border:1px solid #DCE3E3;">ROADMAP</span>';
+        var more = live
+          ? '<a class="fam-more" href="' + p.id + '.html" aria-label="Learn more about ' + p.name + '">Learn more' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>'
+          : '';
+        return '<div class="fam-card">' +
+          '<span class="car-ic" style="width:46px;height:46px;border-radius:13px;box-shadow:none;background:color-mix(in srgb, ' + p.accent + ' 12%, #fff);color:' + p.accent + ';">' + svgIcon(p.icon, 21) + '</span>' +
+          '<div class="flex items-center gap-2.5 mt-5"><h3 class="font-display font-bold text-xl">' + p.name + '</h3>' + badge + '</div>' +
+          '<p class="body-copy text-[.9375rem] text-neutral-600 mt-3">' + p.desc + '</p>' +
+          '<div class="mt-5 pt-5 space-y-2.5" style="border-top:1px solid #EDF1F1;">' +
+            p.feats.slice(0, 3).map(function (f) {
+              return '<p class="flex items-start gap-2.5 text-sm font-medium text-neutral-700">' + CHECK_FAM(p.accent) + f + '</p>';
+            }).join('') +
+          '</div>' + more +
+        '</div>';
+      }
+
+      function famRender(status) {
+        var items = PRODUCTS.filter(function (p) { return p.status === status; });
+        famGrid.className = 'mt-8 grid sm:grid-cols-2 gap-5 ' + (status === 'production' ? 'lg:grid-cols-3' : 'lg:grid-cols-4');
+        famGrid.innerHTML = items.map(famCard).join('');
+        if (hasGsap) {
+          gsap.fromTo(famGrid.children,
+            { opacity: 0, y: 18 },
+            { opacity: 1, y: 0, duration: .55, ease: 'expo.out', stagger: .07 });
+        }
+      }
+
+      function famSelect(status) {
+        var liveActive = status === 'production';
+        famTabLive.classList.toggle('is-active', liveActive);
+        famTabRoad.classList.toggle('is-active', !liveActive);
+        famTabLive.setAttribute('aria-pressed', liveActive ? 'true' : 'false');
+        famTabRoad.setAttribute('aria-pressed', liveActive ? 'false' : 'true');
+        famRender(status);
+      }
+
+      famTabLive.addEventListener('click', function () { famSelect('production'); });
+      famTabRoad.addEventListener('click', function () { famSelect('roadmap'); });
+      famRender('production');
 
       /* Mobile nav */
       var burger = document.getElementById('nav-burger');
@@ -466,5 +539,49 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
   .badge-live .dot {
     width: 6px; height: 6px; border-radius: 999px;
     background: #12A98C; box-shadow: 0 0 0 3px rgba(18,169,140,.18);
+  }
+
+  /* ---------- Product family (tabbed cards) ---------- */
+  .fam-tab {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .625rem 1.25rem; border-radius: 999px; cursor: pointer;
+    font-weight: 600; font-size: .875rem; color: #4C5958;
+    transition: color .18s ease;
+  }
+  .fam-tab:hover { color: #051D1D; }
+  .fam-tab:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); }
+  .fam-tab.is-active {
+    background: #fff; color: #051D1D;
+    box-shadow: 0 1px 2px rgba(5,29,29,.08), 0 4px 12px -4px rgba(2,148,145,.15);
+  }
+  .fam-count {
+    font-family: "JetBrains Mono", monospace; font-size: .6875rem;
+    padding: .125rem .4375rem; border-radius: 999px;
+    background: #DCE3E3; color: #4C5958;
+  }
+  .fam-tab.is-active .fam-count { background: #ECFBF3; color: #07746F; }
+  .fam-card {
+    background: #fff; border: 1px solid #DCE3E3; border-radius: 20px; padding: 1.75rem;
+    box-shadow: var(--shadow-card);
+    transition: transform .22s cubic-bezier(.34,1.56,.64,1), border-color .22s ease;
+    will-change: transform;
+  }
+  .fam-card:hover { transform: translateY(-4px) scale(1.02); border-color: #A6E9C6; }
+  .fam-more {
+    display: inline-flex; align-items: center; gap: .375rem;
+    margin-top: 1.25rem; font-weight: 600; font-size: .875rem;
+    color: #07746F;
+    transition: color .18s ease;
+  }
+  .fam-more:hover { color: #051D1D; }
+  .fam-more:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus-ring); border-radius: 6px; }
+  .fam-more svg { transition: transform .2s cubic-bezier(.22,1,.36,1); }
+  .fam-more:hover svg { transform: translateX(3px); }
+
+  .car-ic {
+    width: 54px; height: 54px; border-radius: 15px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent); color: #fff;
+    box-shadow: 0 12px 28px -10px var(--accent);
   }
 </style>
