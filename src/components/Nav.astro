@@ -30,10 +30,7 @@ const logoHref = onHome ? '#' : base;
             {links.map((l) => (
               <a class={'nav-link' + (l.current ? ' is-current' : '')} href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a>
             ))}
-            <span class="nav-lamp" id="nav-lamp" aria-hidden="true">
-              <span class="nav-lamp-bar"><i></i><i></i><i></i></span>
-              <span class="nav-lamp-under"></span>
-            </span>
+            <span class="nav-lamp" id="nav-lamp" aria-hidden="true"></span>
           </div>
           <a href={ctaHref} class="btn btn-primary !py-2.5 !px-5 text-sm hidden sm:inline-flex">Book a demo</a>
           <button type="button" id="nav-burger" class="nav-burger lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
